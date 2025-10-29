@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <title>Fale Conosco — SorrisoNet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- TOPO -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html">
+        <img src="logotipo_sorriso_net_azul_claro-removebg-preview.png" alt="SorrisoNet">
+      </a>
+      <button class="btn-primary" onclick="location.href='assinatura.html'">ASSINE JÁ</button>
+      <div class="search"><input type="search" placeholder="Digite sua pesquisa" /></div>
+      <nav class="main-nav">
+        <a href="area-assinante.html">ÁREA DO ASSINANTE</a>
+        <a href="planos.html">PLANOS</a>
+        <a href="agenda_doutores.html">GERENCIAMENTO</a>
+        <a href="contato.html">FALE CONOSCO</a>
+  <a id="btnLoginLogout" href="login.html">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO -->
+  <main class="container" style="padding:32px 0">
+    <h1 style="color:var(--primary); margin-bottom:6px;">Fale Conosco</h1>
+    <p style="margin-top:0; color:#555;">Envie sua mensagem para nossa equipe. Responderemos o quanto antes.</p>
+
+    <section class="card">
+      <form id="form-contato" class="contact-grid" novalidate>
+        <div class="full">
+          <label for="nome">Nome completo</label>
+          <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
+        </div>
+
+        <div>
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" placeholder="voce@email.com" required>
+        </div>
+
+        <div>
+          <label for="assunto">Assunto</label>
+          <select id="assunto" name="assunto" required>
+            <option value="">Selecione</option>
+            <option>Dúvida sobre planos</option>
+            <option>Problema no acesso</option>
+            <option>Agendamento/Remarcação</option>
+            <option>Financeiro/Boleto</option>
+            <option>Outros</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="tipo">Tipo de solicitação</label>
+          <select id="tipo" name="tipo" required>
+            <option value="">Selecione</option>
+            <option>Dúvida</option>
+            <option>Suporte</option>
+            <option>Elogio</option>
+            <option>Reclamação</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="telefone">Telefone (opcional)</label>
+          <input type="tel" id="telefone" name="telefone" placeholder="(11) 90000-0000">
+        </div>
+
+        <div class="full">
+          <label for="mensagem">Mensagem</label>
+          <textarea id="mensagem" name="mensagem" rows="6" placeholder="Descreva sua dúvida/solicitação" required></textarea>
+        </div>
+
+        <div class="full up-row">
+          <label for="anexo">Anexo (opcional)</label>
+          <input type="file" id="anexo" name="anexo" accept=".png,.jpg,.jpeg,.pdf,.doc,.docx">
+          <small class="hint">Formatos aceitos: PNG, JPG, PDF, DOC, DOCX (máx. ~5MB)</small>
+        </div>
+
+        <div class="full actions-row">
+          <button type="submit" class="auth-btn" style="max-width:220px;">Enviar mensagem</button>
+          <button type="button" id="btn-limpar" class="btn-sec" style="max-width:160px;">Limpar</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Confirmação visual (mostrada após envio simulado) -->
+    <section id="ok-box" class="card ok-box" style="display:none; margin-top:16px;">
+      <h2 style="margin:0 0 6px 0; color:#0e7a3a;">Mensagem enviada!</h2>
+      <p style="margin:0; color:#444;">Recebemos sua solicitação. Um protocolo foi gerado para acompanhamento.</p>
+      <p style="margin:6px 0 0 0;"><strong>Protocolo:</strong> <span id="proto"></span></p>
+    </section>
+  </main>
+
+  <!-- RODAPÉ -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© SorrisoNet — Trabalho acadêmico</p>
+    </div>
+  </footer>
+
+  <!-- JS DEMO (envio simulado) -->
+  <script>
+    const form = document.getElementById('form-contato');
+    const okBox = document.getElementById('ok-box');
+    const protoSpan = document.getElementById('proto');
+    const btnLimpar = document.getElementById('btn-limpar');
+
+    function gerarProtocolo(){
+      const n = Date.now().toString(36).toUpperCase();
+      return 'SN-' + n.slice(-8);
+    }
+
+    function validaMinima(){
+      const req = ['nome','email','assunto','tipo','mensagem'];
+      for(const id of req){
+        const el = document.getElementById(id);
+        if(!el.value.trim()) return false;
+      }
+      return true;
+    }
+
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      if(!validaMinima()){
+        alert('Preencha os campos obrigatórios.');
+        return;
+      }
+
+      // Aqui poderia ir um fetch real:
+      // fetch('/api/contato', { method:'POST', body: formData })
+
+      const protocolo = gerarProtocolo();
+      protoSpan.textContent = protocolo;
+
+      okBox.style.display = 'block';
+      form.reset();
+      window.scrollTo({top: okBox.offsetTop - 20, behavior:'smooth'});
+    });
+
+    btnLimpar.addEventListener('click', ()=> form.reset());
+  </script>
+
+  <script src="js/api.js"></script>
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('btnLoginLogout');
+
+  // se o botão existir
+  if (btn) {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      // se estiver logado
+      btn.textContent = 'Sair';
+      btn.href = '#';
+      btn.onclick = () => {
+        logout();
+      };
+    } else {
+      // se não estiver logado
+      btn.textContent = 'Login';
+      btn.href = 'login.html';
+    }
+  }
+});
+</script>
+</body>
+</html>
+
+</body>
+</html>

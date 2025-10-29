@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <title>Assinatura — SorrisoNet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- TOPO -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html">
+        <img src="logotipo_sorriso_net_azul_claro-removebg-preview.png" alt="SorrisoNet">
+      </a>
+
+      <button class="btn-primary" onclick="location.href='assinatura.html'">ASSINE JÁ</button>
+
+      <div class="search">
+        <input type="search" placeholder="Digite sua pesquisa" />
+      </div>
+
+      <nav class="main-nav">
+        <a href="area-assinante.html">ÁREA DO ASSINANTE</a>
+        <a href="planos.html">PLANOS</a>
+        <a href="agenda_doutores.html">GERENCIAMENTO</a>
+        <a href="contato.html">FALE CONOSCO</a>
+        <a id="btnLoginLogout" href="login.html">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO -->
+  <main class="container" style="padding:32px 0">
+    <h1 style="color:var(--primary); margin-bottom:4px;">Finalize sua assinatura</h1>
+    <p style="margin-top:0; color:#555;">Escolha o plano, preencha seus dados e confirme o pagamento.</p>
+
+    <form id="form-assinatura" class="checkout">
+      <!-- COLUNA ESQUERDA -->
+      <section class="card">
+        <h2>1) Escolha do plano</h2>
+        <div class="plans-list">
+          <label class="plan-item">
+            <input type="radio" name="plano" value="Basico|99" data-nome="Plano Básico" data-valor="99" required>
+            <div>
+              <strong>Plano Básico</strong>
+              <span>R$ 99/mês</span>
+            </div>
+          </label>
+
+          <label class="plan-item destaque">
+            <input type="radio" name="plano" value="Premium|149" data-nome="Plano Premium" data-valor="149" required>
+            <div>
+              <strong>Plano Premium</strong>
+              <span>R$ 149/mês</span>
+            </div>
+          </label>
+
+          <label class="plan-item">
+            <input type="radio" name="plano" value="Familia|249" data-nome="Plano Família" data-valor="249" required>
+            <div>
+              <strong>Plano Família</strong>
+              <span>R$ 249/mês</span>
+            </div>
+          </label>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>2) Dados do assinante</h2>
+        <div class="grid2">
+          <div>
+            <label for="nome">Nome completo</label>
+            <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
+          </div>
+          <div>
+            <label for="cpf">CPF</label>
+            <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" required>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div>
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" placeholder="voce@email.com" required>
+          </div>
+          <div>
+            <label for="telefone">Telefone</label>
+            <input type="tel" id="telefone" name="telefone" placeholder="(11) 90000-0000" required>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div>
+            <label for="cep">CEP</label>
+            <input type="text" id="cep" name="cep" placeholder="00000-000">
+          </div>
+          <div>
+            <label for="cidade">Cidade</label>
+            <input type="text" id="cidade" name="cidade" placeholder="São Paulo">
+          </div>
+        </div>
+
+        <label for="endereco">Endereço</label>
+        <input type="text" id="endereco" name="endereco" placeholder="Rua, número, complemento">
+      </section>
+
+      <section class="card">
+        <h2>3) Pagamento</h2>
+
+        <div class="pay-tabs">
+          <label><input type="radio" name="pagamento" value="cartao" checked> Cartão de crédito</label>
+          <label><input type="radio" name="pagamento" value="pix"> Pix (simulado)</label>
+        </div>
+
+        <!-- CARTÃO -->
+        <div id="box-cartao" class="grid2">
+          <div>
+            <label for="numero">Número do cartão</label>
+            <input type="text" id="numero" name="numero" placeholder="0000 0000 0000 0000">
+          </div>
+          <div>
+            <label for="nome_cartao">Nome impresso</label>
+            <input type="text" id="nome_cartao" name="nome_cartao" placeholder="NOME SOBRENOME">
+          </div>
+          <div>
+            <label for="validade">Validade (MM/AA)</label>
+            <input type="text" id="validade" name="validade" placeholder="12/29">
+          </div>
+          <div>
+            <label for="cvv">CVV</label>
+            <input type="password" id="cvv" name="cvv" placeholder="***">
+          </div>
+        </div>
+
+        <!-- PIX -->
+        <div id="box-pix" style="display:none;">
+          <p style="color:#555;">Ao confirmar, mostraremos um QR Code simulado (apenas para demonstração na apresentação).</p>
+        </div>
+
+        <label class="terms">
+          <input type="checkbox" id="termos" required>
+          <span>Li e concordo com os termos da assinatura.</span>
+        </label>
+      </section>
+
+      <!-- COLUNA DIREITA (RESUMO) -->
+      <aside class="summary card">
+        <h3>Resumo</h3>
+        <ul class="sum-list">
+          <li><span>Plano</span><strong id="sum-plano">—</strong></li>
+          <li><span>Valor mensal</span><strong id="sum-valor">R$ 0,00</strong></li>
+          <li><span>Taxa de adesão</span><strong>R$ 0,00</strong></li>
+          <li class="total"><span>Total inicial</span><strong id="sum-total">R$ 0,00</strong></li>
+        </ul>
+
+        <button type="submit" class="auth-btn">Confirmar assinatura</button>
+        <p class="safe-note">Ambiente simulado e seguro para apresentação.</p>
+
+        <!-- status / erro / sucesso -->
+        <p id="statusAssinatura"
+           style="text-align:center; margin-top:12px; font-size:14px; color:#555;">
+        </p>
+      </aside>
+
+    </form>
+  </main>
+
+  <!-- RODAPÉ -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© SorrisoNet — Trabalho acadêmico</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+  const form          = document.getElementById('form-assinatura');
+
+  const radiosPlano   = [...document.querySelectorAll('input[name="plano"]')];
+  const sumPlano      = document.getElementById('sum-plano');
+  const sumValor      = document.getElementById('sum-valor');
+  const sumTotal      = document.getElementById('sum-total');
+
+  const radiosPay     = [...document.querySelectorAll('input[name="pagamento"]')];
+  const boxCartao     = document.getElementById('box-cartao');
+  const boxPix        = document.getElementById('box-pix');
+
+  const termos        = document.getElementById('termos');
+  const msgStatus     = document.getElementById('statusAssinatura');
+
+  const campoNome     = document.getElementById('nome');
+  const campoEmail    = document.getElementById('email');
+
+  const btnLoginLogout = document.getElementById('btnLoginLogout');
+  const btnAssineJa    = document.querySelector('.btn-primary'); // o botão azul ASSINE JÁ no header
+
+  // 1. Garante login
+  let me = null;
+  try {
+    me = await requireLogin(); // se não tiver login ele já manda pro login.html
+  } catch (err) {
+    return;
+  }
+
+  // 2. Se já é premium:
+  if (me.premium === true) {
+    // some com o botão "ASSINE JÁ"
+    if (btnAssineJa) {
+      btnAssineJa.style.display = 'none';
+    }
+
+    // Mostra mensagem no lugar do formulário inteiro e impede assinar de novo
+    if (msgStatus) {
+      msgStatus.textContent = 'Você já é Premium 😎 Não precisa assinar novamente.';
+      msgStatus.style.color = 'green';
+      msgStatus.style.fontSize = '16px';
+      msgStatus.style.fontWeight = '600';
+    }
+
+    // desabilita o form visualmente
+    if (form) {
+      form.style.opacity = '0.5';
+      form.querySelectorAll('input,button,select,textarea').forEach(el=>{
+        el.disabled = true;
+      });
+    }
+
+    // opcional: redirecionar direto pra área do assinante depois de alguns segundos
+    setTimeout(()=>{
+      window.location.href = 'area-assinante.html';
+    }, 3000);
+
+    // IMPORTANTE: para aqui. não continua com o resto
+    return;
+  }
+
+  // 3. Se NÃO é premium: deixa continuar, mas já preenche nome/email
+  if (me && me.nome)   campoNome.value  = me.nome;
+  if (me && me.email)  campoEmail.value = me.email;
+
+  // também deixa o botão "ASSINE JÁ" visível, mas se quiser você pode esconder mesmo para não premium:
+  // (normalmente você quer MANTER visível pra não premium)
+  // if (btnAssineJa) btnAssineJa.style.display = 'none';
+
+  // 4. Atualiza botão Login/Sair do topo
+  if (btnLoginLogout) {
+    const token = localStorage.getItem('token');
+    if (token) {
+      btnLoginLogout.textContent = 'Sair';
+      btnLoginLogout.href = '#';
+      btnLoginLogout.onclick = () => { logout(); };
+    } else {
+      btnLoginLogout.textContent = 'Login';
+      btnLoginLogout.href = 'login.html';
+    }
+  }
+
+  // 5. Pré-seleciona plano vindo da URL (?plano=Premium etc)
+  const params = new URLSearchParams(window.location.search);
+  const planoURL = params.get('plano'); // "Premium", "Basico", "Familia"...
+
+  if (planoURL) {
+    const alvo = radiosPlano.find(r =>
+      r.value.toLowerCase().startsWith(planoURL.toLowerCase())
+    );
+    if (alvo) {
+      alvo.checked = true;
+    }
+  }
+
+  function formatarBRL(v){
+    return Number(v).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+  }
+
+  function atualizarResumo(){
+    const r = radiosPlano.find(x => x.checked);
+    if(!r){
+      sumPlano.textContent = '—';
+      sumValor.textContent = 'R$ 0,00';
+      sumTotal.textContent = 'R$ 0,00';
+      return;
+    }
+    const [nomePlano, valorPlano] = r.value.split('|');
+    sumPlano.textContent = nomePlano;
+    sumValor.textContent = formatarBRL(valorPlano);
+    sumTotal.textContent = formatarBRL(valorPlano);
+  }
+
+  radiosPlano.forEach(r => r.addEventListener('change', atualizarResumo));
+  atualizarResumo();
+
+  function updatePay(){
+    const pay = radiosPay.find(x=>x.checked)?.value;
+    if(pay === 'cartao'){
+      boxCartao.style.display = 'grid';
+      boxPix.style.display = 'none';
+    }else{
+      boxCartao.style.display = 'none';
+      boxPix.style.display = 'block';
+    }
+  }
+  radiosPay.forEach(r => r.addEventListener('change', updatePay));
+  updatePay();
+
+  // 6. Submeter pagamento → virar premium
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+
+    if(!termos.checked){
+      alert('Você precisa aceitar os termos.');
+      return;
+    }
+
+    const planoEscolhido = radiosPlano.find(x=>x.checked);
+    if(!planoEscolhido){
+      alert('Escolha um plano.');
+      return;
+    }
+
+    msgStatus.textContent = 'Processando pagamento...';
+    msgStatus.style.color = '#555';
+    msgStatus.style.fontWeight = '400';
+
+    try {
+      // chama nossa rota que marca o usuário como premium
+      const resp = await fetch('http://localhost:3000/api/make-premium', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + localStorage.getItem('token')
+        },
+        body: JSON.stringify({})
+      });
+
+      const data = await resp.json();
+
+      if (!(resp.ok && data.premium === true)) {
+        msgStatus.textContent = 'Algo deu errado ao ativar sua assinatura.';
+        msgStatus.style.color = 'red';
+        console.warn('Resposta inesperada:', data);
+        return;
+      }
+
+      // confirmar com /api/me
+      const meResp = await fetch('http://localhost:3000/api/me', {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token')
+        }
+      });
+      const meData = await meResp.json();
+
+      if (meResp.ok && meData.premium === true) {
+        msgStatus.textContent = 'Pagamento aprovado! Agora você é Premium ✅';
+        msgStatus.style.color = 'green';
+        msgStatus.style.fontWeight = '600';
+
+        // esconde botão ASSINE JÁ imediatamente, já que virou premium agora
+        if (btnAssineJa) {
+          btnAssineJa.style.display = 'none';
+        }
+
+        // manda pra área do assinante depois de 3 segundos pra dar tempo de ler
+        setTimeout(()=>{
+          window.location.href = 'area-assinante.html';
+        }, 3000);
+      } else {
+        msgStatus.textContent = 'Pagamento feito, mas premium não confirmou ainda.';
+        msgStatus.style.color = 'red';
+        console.warn('meData:', meData);
+      }
+
+    } catch (err){
+      console.error(err);
+      msgStatus.textContent = 'Erro ao processar pagamento. Faça login e tente de novo.';
+      msgStatus.style.color = 'red';
+    }
+  });
+});
+</script>
+</body>
+</html>

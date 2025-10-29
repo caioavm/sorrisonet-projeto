@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <title>Cadastro — SorrisoNet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- TOPO -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html">
+        <img src="logotipo_sorriso_net_azul_claro-removebg-preview.png" alt="SorrisoNet">
+      </a>
+      <button class="btn-primary" onclick="location.href='assinatura.html'">ASSINE JÁ</button>
+      <div class="search"><input type="search" placeholder="Digite sua pesquisa" /></div>
+      <nav class="main-nav">
+        <a href="area-assinante.html">ÁREA DO ASSINANTE</a>
+        <a href="planos.html">PLANOS</a>
+        <a href="agenda_doutores.html">GERENCIAMENTO</a>
+        <a href="contato.html">FALE CONOSCO</a>
+  <a id="btnLoginLogout" href="login.html">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO -->
+  <main class="auth-wrapper">
+   <form id="form-cadastro" class="form-cadastro">
+  <label>
+    Nome completo
+    <input type="text" name="nome" required />
+  </label>
+
+  <label>
+    E-mail
+    <input type="email" name="email" required />
+  </label>
+
+  <label>
+    Senha
+    <input type="password" name="senha" required />
+  </label>
+
+  <label>
+    CPF
+    <input type="text" name="cpf" />
+  </label>
+
+  <label>
+    Telefone
+    <input type="text" name="telefone" />
+  </label>
+
+  <label>
+    Endereço
+    <input type="text" name="endereco" />
+  </label>
+
+  <button type="submit">Criar conta</button>
+</form>
+
+<div id="msg-cadastro" style="display:none; color: green; font-weight: bold;">
+  Conta criada! Agora você já pode fazer login.
+</div>
+
+  </main>
+
+  <!-- RODAPÉ -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© SorrisoNet — Trabalho acadêmico</p>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+<script>
+const formCadastro = document.getElementById('form-cadastro');
+const msgOk = document.getElementById('msg-cadastro');
+
+formCadastro.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+
+  // pega todos os campos do form e transforma em objeto
+  const dados = Object.fromEntries(new FormData(formCadastro).entries());
+
+  try {
+    // chama a API pra registrar
+    const res = await apiPost('/api/register', dados);
+
+    // se chegar aqui, criou o usuário
+    msgOk.style.display = 'block';
+
+    // limpa o form pra ficar bonitinho
+    formCadastro.reset();
+
+    // opcionalzinho: depois de 1.5s mandar pro login
+    setTimeout(()=>{
+      window.location.href = 'login.html';
+    }, 1500);
+
+  } catch(err) {
+    alert('Erro ao cadastrar: ' + err.message);
+  }
+});
+</script>
+</body>
+</html>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('btnLoginLogout');
+
+  // se o botão existir
+  if (btn) {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      // se estiver logado
+      btn.textContent = 'Sair';
+      btn.href = '#';
+      btn.onclick = () => {
+        logout();
+      };
+    } else {
+      // se não estiver logado
+      btn.textContent = 'Login';
+      btn.href = 'login.html';
+    }
+  }
+});
+</script>
+</body>
+</html>
+
+
+</body>
+</html>
