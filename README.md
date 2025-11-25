@@ -1,4 +1,4 @@
-<h1 align="">🦷 Projeto Sorriso Net 🦷 </h1> 
+<h1 align=""> Projeto Sorriso Net </h1> 
 
 <p align="">
   
@@ -38,13 +38,7 @@
 - **Controle de Versão:** Git e GitHub
 - **Design** Canvas
 
-## 👥 Criadores
 
-- **Backend:** Java com Spring Boot
-- **Frontend:** Angular e Bootstrap
-- **Banco de Dados:** MySQL
-- **Controle de Versão:** Git e GitHub
-- **Design:** Canvas
 
     <br >
 
@@ -55,4 +49,5 @@
 <p align="center">
   <img src="imgs/git-telas.gif" alt="Telas Criadas pelo Web Designer">
 </p>
+
 
